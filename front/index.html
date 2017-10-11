@@ -1,0 +1,72 @@
+<html>
+    <head>
+        <title>CORS</title>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <style>
+            .cors-result {
+                height: 200px;
+                padding-top: 10px;
+                background-color: #fdfdfd;
+                border: 1px solid tomato;
+            }
+        </style>
+        <form id="login">
+            <input type="text" name="login">
+            <input type="password" name="pass">
+            <button class="login">login</button>
+        </form>
+        <br><br>
+        <div>
+            <button class="cors-send">send cors req</button>
+            <div class="cors-result">
+
+            </div>
+        </div>
+    <script>
+
+        $(document).ready(function () {
+            /* Ehleed login hiih ch yum uu authenticate hiij cookie avah */
+            $('form#login').submit(function(event) {
+                var postData = $(this).serializeArray();
+                $.ajax({
+                    url : '/corsapi/login',
+                    type: "POST",
+                    data : postData,
+                    success:function(data, status) {
+                        $('.cors-result').html(data)
+
+                    },
+                    error: function(jqXHR, status, error) {
+                        $('.cors-result').html(error)
+                    }
+                });
+                event.preventDefault();
+            });
+
+            /* Session cookie irsenii daraa huseltee jinhene request ilgeene */
+            $('button.cors-send').on('click', function () {
+
+                $.ajax({
+                    url : '/corsapi/cors-request', /* jinhene API-giinhaa url-g domain nameguigeer /corsapi-n araas zalguulaad bichne */
+                    type: "POST",
+                    data : $.param({
+                        reqparam: 'reqvalue'
+                    }),
+                    success:function(data, status) {
+                        console.log(data);
+                        $('.cors-result').html(data)
+                    },
+                    error: function(jqXHR, status, error) {
+                        $('.cors-result').html(error)
+
+                    }
+                });
+            });
+
+        });
+
+    </script>
+    </body>
+</html>

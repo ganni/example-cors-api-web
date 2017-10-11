@@ -1,0 +1,17 @@
+{
+  "name": "example-w-cors-api",
+  "version": "1.0.0",
+  "description": "example local web with cors api",
+  "main": " ",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ganni",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "http-proxy-middleware": "^0.17.4",
+    "jquery": "^3.2.1"
+  }
+}
